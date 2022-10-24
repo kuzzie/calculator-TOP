@@ -4,45 +4,78 @@ const display = document.querySelector(".display");
 const clearButton = document.querySelector(".clear");
 const equalButton = document.querySelector(".equals");
 let currentOperator;
-let firstNumber;
-let secondNumber;
+let firstNumber = "";
+let secondNumber = "";
+let result = 0;
+
+// const displayResult = (calculated) => {
+//   display.innerHTML = calculated;
+// }
 
 const operate = (operator, numOne, numTwo) => {
   switch (operator) {
     case "addition":
       display.innerHTML = `${parseInt(numOne) + parseInt(numTwo)}`;
-      console.log("added");
+      result = parseInt(numOne) + parseInt(numTwo);
+      firstNumber = result;
+      secondNumber = "";
+      currentOperator = undefined;
       break;
     case "subtraction":
       display.innerHTML = `${parseInt(numOne) - parseInt(numTwo)}`;
-      console.log("subtracted");
+      result = parseInt(numOne) - parseInt(numTwo);
+      firstNumber = result;
+      secondNumber = "";
+      currentOperator = undefined;
       break;
     case "multiply":
       display.innerHTML = `${parseInt(numOne) * parseInt(numTwo)}`;
-      console.log("multiplied");
+      result = parseInt(numOne) * parseInt(numTwo);
+      firstNumber = result;
+      secondNumber = "";
+      currentOperator = undefined;
       break;
     case "division":
       display.innerHTML = `${parseInt(numOne) / parseInt(numTwo)}`;
-      console.log("divided");
+      result = parseInt(numOne) / parseInt(numTwo);
+      firstNumber = result;
+      secondNumber = "";
+      currentOperator = undefined;
       break;
   }
 }
 
 numberButtons.forEach(button => {
   button.addEventListener("click", () => {
-    if (!firstNumber) {
-      firstNumber = button.innerText;
-      display.innerHTML = button.innerText;
+    if (!result && !currentOperator) {
+      firstNumber += button.innerText;
+      display.innerHTML = firstNumber;
+      return;
     }
-    secondNumber = button.innerText;
-    display.innerHTML = button.innerText;
+    secondNumber += button.innerText;
+    display.innerHTML = secondNumber;
   });
 });
 
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
+    // if (!result && !currentOperator) {
+    //   currentOperator = button.id;
+    //   display.innerHTML = button.id.charAt(0).toUpperCase() + button.id.slice(1);
+    //   return;
+    // }
+    if (!currentOperator) {
+      if (!result) {
+        currentOperator = button.id;
+        display.innerHTML = button.id.charAt(0).toUpperCase() + button.id.slice(1);
+        return;
+      }
+      currentOperator = button.id;
+      display.innerHTML = button.id.charAt(0).toUpperCase() + button.id.slice(1);
+      return;
+    }
+    operate(currentOperator, firstNumber, secondNumber);
     currentOperator = button.id;
-    display.innerHTML = button.id.charAt(0).toUpperCase() + button.id.slice(1);
   });
 });
 
@@ -52,6 +85,7 @@ equalButton.addEventListener("click", () => {
 });
 
 clearButton.addEventListener("click", () => {
+  result = 0;
   currentOperator = "";
   firstNumber = "";
   secondNumber = "";
