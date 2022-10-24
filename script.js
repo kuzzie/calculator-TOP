@@ -36,6 +36,11 @@ const operate = (operator, numOne, numTwo) => {
       currentOperator = undefined;
       break;
     case "division":
+      if (secondNumber == "0") {
+        clearValues();
+        display.innerHTML = "ERROR";
+        break;
+      }
       display.innerHTML = `${parseInt(numOne) / parseInt(numTwo)}`;
       result = parseInt(numOne) / parseInt(numTwo);
       firstNumber = result;
@@ -43,6 +48,14 @@ const operate = (operator, numOne, numTwo) => {
       currentOperator = undefined;
       break;
   }
+}
+
+const clearValues = () => {
+  result = 0;
+  currentOperator = "";
+  firstNumber = "";
+  secondNumber = "";
+  display.innerHTML = "";
 }
 
 numberButtons.forEach(button => {
@@ -85,9 +98,5 @@ equalButton.addEventListener("click", () => {
 });
 
 clearButton.addEventListener("click", () => {
-  result = 0;
-  currentOperator = "";
-  firstNumber = "";
-  secondNumber = "";
-  display.innerHTML = "";
+  clearValues();
 });
