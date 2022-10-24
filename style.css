@@ -1,0 +1,58 @@
+body {
+  width: 500px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  font-size: 16px;
+}
+
+.cal {
+  width: 500px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.operatorButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.operatorButtons>button {
+  width: 70px;
+  height: 50px;
+}
+
+.operator {
+  width: 100px;
+}
+
+.numberButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 300px;
+}
+
+.number {
+  width: 150px;
+  height: 50px;
+}
+
+.equals {
+  width: 150px;
+  height: 50px;
+}
+
+.display {
+  border: solid 1px gainsboro;
+  height: 50px;
+  font-size: 40px;
+  text-align: right;
+}
